@@ -1,6 +1,6 @@
 # import request
 from flask import Flask, jsonify,request
-
+import json
 
 app = Flask(__name__)
 
@@ -24,7 +24,9 @@ def hello_world():
 def add_new_todo():
     request_body = request.data
     print("Incoming request with the following body", request_body)
-    return 'Response for the POST todo'
+    decode_object = json.loads(request.data)
+    todos.append(decode_object)
+    return jsonify(todos)
 
 
 if __name__ == '__main__':
