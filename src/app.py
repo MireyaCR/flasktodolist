@@ -15,8 +15,7 @@ todos = [
 ]
     
 @app.route('/todos', methods=['GET'])
-def hello_world():
-    
+def hello_world():    
     json_text = jsonify(todos)
     return json_text
 
@@ -26,6 +25,12 @@ def add_new_todo():
     print("Incoming request with the following body", request_body)
     decode_object = json.loads(request.data)
     todos.append(decode_object)
+    return jsonify(todos)
+
+@app.route('/todos/<int:position>', methods=['DELETE'])
+def delete_todo(position):
+    print("This is the position to delete: ",position)
+    todos.pop(position)
     return jsonify(todos)
 
 
